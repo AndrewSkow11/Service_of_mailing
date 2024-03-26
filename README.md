@@ -14,7 +14,14 @@
 - скачать все файлы проекта
 - установить зависимости из файла requirement.txt
 - создать .env файл со своими файлами (образец приложен)
-- создать базу данных 
+- создать базу данных
+```commandline
+(venv) % psql -U postgres 
+Password for user postgres: 
+postgres=# CREATE DATABASE db_mailer;
+CREATE DATABASE
+postgres=# \q
+```
 
 
 ## Автор 
