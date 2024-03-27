@@ -9,7 +9,7 @@ NULLABLE = {
 class Client(models.Model):
     """Клиент - тот, кто получает рассылки"""
     email = models.EmailField(verbose_name='контактный email')
-    name = models.CharField(max='255', verbose_name='Ф. И. О.')
+    name = models.CharField(max_length=255, verbose_name='Ф. И. О.')
     comment = models.TextField(**NULLABLE, verbose_name='комментарий')
 
     # user = models.ForeignKey(User, on_delete=models.CASCADE,
