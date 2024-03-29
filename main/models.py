@@ -48,7 +48,7 @@ class Mailing(models.Model):
     STATUS_CHOICES = [
         ('completed', 'завершена'),
         ('created', 'создана'),
-        ('запущена', 'launched')
+        ('launched', 'запущена')
     ]
 
     title = models.CharField(max_length=255, verbose_name='заголовок рассылки')
@@ -62,3 +62,4 @@ class Mailing(models.Model):
                                    default='', verbose_name='периодичность')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, null=True,
                                 verbose_name='сообщение')
+    status = models.CharField(max_length=128, choices=STATUS_CHOICES, verbose_name='статус рассылки')
