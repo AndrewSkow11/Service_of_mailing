@@ -62,9 +62,9 @@ class Mailing(models.Model):
     end_date = models.DateTimeField(default=timezone.now, verbose_name='конечная дата')
     periodicity = models.CharField(default='разовая', max_length=64, choices=CHOICES_INTERVAL,
                                    verbose_name='периодичность')
-    status = models.CharField(max_length=64, choices=STATUS_CHOICES, verbose_name='статус рассылки')
+    status = models.CharField(max_length=64, choices=STATUS_CHOICES, verbose_name='статус рассылки', **NULLABLE)
     is_active = models.BooleanField(default=True, verbose_name="актуальная")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь', **NULLABLE)
 
     def __str__(self):
         return self.name

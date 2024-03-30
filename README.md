@@ -23,6 +23,12 @@ CREATE DATABASE
 postgres=# \q
 ```
 
+В случае возникновения ошибки InvalidCursorName 
+```commandline
+python3 manage.py migrate --run-syncdb
+
+```
+
 
 ## Автор 
 Андрей Сковородников, https://github.com/AndrewSkow11

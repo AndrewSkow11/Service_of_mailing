@@ -2,11 +2,16 @@
 
 <p>something</p>
 
-<button type="button">
-    <a href="{% url 'main:mailing_create' %}">Создать рассылку</a>
-</button>
+
 
 {% block content %}
+
+<a href="{% url 'main:mailing_create' %}" type="button" class="btn btn-dark mb-2">
+    Создать рассылку
+</a>
+
+
+
 
 <div class="row mb-2">
 
@@ -53,6 +58,4 @@
 
 
     </div>
-
-
     {% endblock %}
