@@ -74,7 +74,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "db_for_django_project",
+        "NAME": "mailing_db",
         "USER": "postgres",
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
     }
