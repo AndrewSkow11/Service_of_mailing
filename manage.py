@@ -3,6 +3,7 @@
 import os
 import sys
 
+from django.core.mail import send_mail
 
 def main():
     """Run administrative tasks."""
@@ -18,6 +19,13 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+    send_mail(
+        subject='Регистрация',
+        message=f'Для успешной регистрации перейдите по ссылке:',
+        from_email=settings.EMAIL_HOST_USER,
+        recipient_list='anjeie24@gmail.ru',
+        fail_silently=False,
+    )
 
 if __name__ == "__main__":
     main()

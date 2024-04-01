@@ -18,7 +18,7 @@ class MailingForm(StylingFormMixin, forms.ModelForm):
         self.request = kwargs.pop('request')
         user = self.request.user
         super().__init__(*args, **kwargs)
-        self.fields['client'].queryset = Client.objects.filter(user=user)
+        # self.fields['client'].queryset = Client.objects.filter(user=user)
         self.fields['message'].queryset = Message.objects.filter(user=user)
 
     class Meta:
@@ -35,7 +35,7 @@ class MailingForm(StylingFormMixin, forms.ModelForm):
         }
 
 
-class MailModerForm(StylingFormMixin, forms.ModelForm):
+class MailingModerForm(StylingFormMixin, forms.ModelForm):
     class Meta:
         model = Mailing
         fields = ('is_active',)
