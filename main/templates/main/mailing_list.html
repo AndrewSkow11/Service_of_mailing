@@ -9,8 +9,7 @@
 
 
 {% for object in object_list %}
-{% if user == object.owner or perms.service.view_mailing %}
-
+{% if object.user == user or user.is_staff %}
 <div class="card mb-4">
     <div class="card-header">
         Рассылка "<b>{{ object.title }}</b>"
@@ -33,30 +32,7 @@
     </div>
 </div>
 {% endif %}
+
 {% endfor %}
 
-
-{% comment %}
-
-
-            <div class="card-footer">
-                {% if object.is_active %}
-                <p>Действующая</p>
-                {% else %}
-                <p>Отменена</p>
-                {% endif %}
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
-
-{% endif %}
-
-</div>
-</div>
-
-{% endcomment %}
 {% endblock %}

@@ -23,7 +23,7 @@ class MailingForm(StylingFormMixin, forms.ModelForm):
         self.request = kwargs.pop('request')
         user = self.request.user
         super().__init__(*args, **kwargs)
-        # self.fields['client'].queryset = Client.objects.filter(user=user)
+        self.fields['client'].queryset = Client.objects.filter(user=user)
         self.fields['message'].queryset = Message.objects.filter(user=user)
 
     class Meta:
@@ -38,7 +38,6 @@ class MailingForm(StylingFormMixin, forms.ModelForm):
                 'placeholder': 'ДД.ММ.ГГГГ ЧЧ: ММ:СС',
                 'type': 'datetime-local'}),
             'is_active': CheckboxInput(attrs={
-
             }),
         }
 

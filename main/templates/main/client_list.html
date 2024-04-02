@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% block content %}
-<div class="header mx-auto text-center">
+<div class="header mx-auto text-center mb-4">
     <h5 class="display-4">{{ title }}</h5>
 </div>
 <div class="col-12 mb-5">
@@ -10,11 +10,8 @@
 <div class="col-12">
     <div class="row">
         {% for object in object_list %}
-            <div class="col-6">
+            <div class="col-12 mb-4">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="my-0 font-weight-normal">{{ object.full_name|title }}</h3>
-                    </div>
                     <div class="card-body">
                         <p>{{ object.email }}</p>
                         {% if object.comment %}
