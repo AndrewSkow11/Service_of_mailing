@@ -28,7 +28,7 @@ postgres=# \q
 python3 manage.py migrate --run-syncdb
 
 ```
-Для кеширования
+Для кеширования запуск редиса обязателен, команды для установки и запуска ниже (в случае если не были установлены все записимости из requirements.txt)
 
 ```commandline
 brew install redis
