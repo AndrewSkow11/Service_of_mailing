@@ -28,6 +28,14 @@ postgres=# \q
 python3 manage.py migrate --run-syncdb
 
 ```
+Для кеширования
+
+```commandline
+brew install redis
+pip install redis
+
+redis-server
+```
 
 
 ## Автор 

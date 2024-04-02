@@ -11,8 +11,20 @@ from main.services import get_cache_for_mailings, get_cache_for_active_mailings
 
 
 # Create your views here.
-def index(request):
-    return render(request, 'main/index.html')
+class Index(ListView):
+    model = Mailing
+    template_name = 'main/index.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['mailings_count'] = get_cache_for_mailings()
+        context_data['active_mailings_count'] = get_cache_for_active_mailings()
+        blog_list = list(Blog.objects.all())
+        random.shuffle(blog_list)
+        context_data['blog_list'] = blog_list[:3]
+        context_data['clients_count'] = len(Client.objects.all())
+        return context_data
+
 
 
 class MailingCreateView(LoginRequiredMixin, CreateView):
@@ -55,8 +67,8 @@ class MailingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class MailingUpdateModeratorView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Mailing
     form_class = MailingModerForm
-    success_url = reverse_lazy('sheduler:mail_list')
-    permission_required = 'sheduler.set_is_activated'
+    success_url = reverse_lazy('main:mailing_list')
+    permission_required = 'main.set_is_activated'
 
 
 class MailingListView(LoginRequiredMixin, ListView):
@@ -66,7 +78,7 @@ class MailingListView(LoginRequiredMixin, ListView):
     }
 
 
-class HomeView(ListView):
+class Index(ListView):
     model = Mailing
     template_name = 'main/index.html'
 

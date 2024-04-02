@@ -22,7 +22,7 @@ class Client(models.Model):
         verbose_name_plural = 'клиенты'
 
     def __str__(self):
-        return f'{self.email} {self.name}'
+        return f'{self.email}'
 
 
 class Message(models.Model):
@@ -41,7 +41,6 @@ class Message(models.Model):
 
 class Mailing(models.Model):
     CHOICES_INTERVAL = [
-        ('first_time', 'разово'),
         ('day', 'раз в день'),
         ('week', 'раз в неделю'),
         ('month', 'раз в месяц'),
@@ -54,7 +53,7 @@ class Mailing(models.Model):
     ]
 
     title = models.CharField(max_length=255, verbose_name='заголовок рассылки')
-    mail_to = models.ManyToManyField(Client, verbose_name='клиенты')
+    client = models.ManyToManyField(Client, verbose_name='клиенты')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, null=True,
                                 verbose_name='сообщение')
     start_date = models.DateTimeField(default=timezone.now, verbose_name='дата начала')
@@ -66,8 +65,9 @@ class Mailing(models.Model):
     is_active = models.BooleanField(default=True, verbose_name="актуальная")
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь', **NULLABLE)
 
+
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name = 'Рассылка'

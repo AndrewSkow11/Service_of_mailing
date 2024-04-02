@@ -8,12 +8,16 @@
 <div class="col-md-6">
     <div class="card mb-4 box-shadow">
         <img class="card-img-top"
-             src="{{ object.preview|blog_preview }}" height="300"
+             {% if object.preview %}
+             src="{{ object.preview | blog_preview}}" height="150"
+             {% else %}
+             src="/media/blog/no_img.jpeg" height="150"
+             {% endif %}
              alt="Card image cap">
         <div style="height: 170px;" class="card-body">
             <p class="card-text">
-                <p>Дата публикации: {{ object.public_date }}</p>
-                <b>Блог: "{{ object.title|title }}"</b>
+            <p>Дата публикации: {{ object.public_date }}</p>
+            <b>Блог: "{{ object.title|title }}"</b>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                     <a href="{% url 'blog:view' object.pk %}"

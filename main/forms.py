@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import DateTimeInput
+from django.forms import DateTimeInput, CheckboxInput
 
 from main.models import Mailing, Message, Client
 
@@ -8,8 +8,13 @@ class StylingFormMixin(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if field_name == "is_active":
+                field.widget.attrs["class"] = "form-check-input"
+            else:
+                field.widget.attrs["class"] = "form-control"
+
 
 
 class MailingForm(StylingFormMixin, forms.ModelForm):
@@ -32,6 +37,9 @@ class MailingForm(StylingFormMixin, forms.ModelForm):
             'end_date': DateTimeInput(attrs={
                 'placeholder': 'ДД.ММ.ГГГГ ЧЧ: ММ:СС',
                 'type': 'datetime-local'}),
+            'is_active': CheckboxInput(attrs={
+
+            }),
         }
 
 

@@ -3,69 +3,29 @@
 
 {% block content%}
 
-<div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
-    <div class="col-lg-6 px-0">
-        <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-        <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-            efficiently about what’s most interesting in this post’s contents.</p>
-        <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>
-    </div>
-</div>
+<h2 class="mb-4">Статистика сервиса</h2>
 
 <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
     <div class="col-lg-6 px-0">
-        <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
-        <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
-            efficiently about what’s most interesting in this post’s contents.</p>
-        <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>
+        <h1 class="display-4 fst-italic">Рассылки</h1>
+        <p class="lead my-3">Создано рассылок в сервисе: <b>{{ mailings_count| default:0 }}</b></p>
+        <p class="lead my-3">Активные рассылки: <b>{{ active_mailings_count | default:0 }}</b></p>
     </div>
 </div>
 
 
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h3 class="display-4">Sheduler</h3>
-    <p class="lead">Sheduler - сервис управления рассылками, администрирования и получения статистики.
-    </p>
-</div>
-<div class="container">
-    <div class="col-12">
-        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-            <div class="col-4">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Всего рассылок в сервисе</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{ mailings_count }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Всего активных рассылок</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{ active_mailings_count }}</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Число уникальных клиентов</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{ clients_count }}</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
+    <div class="col-lg-6 px-0">
+        <h1 class="display-4 fst-italic">Клиенты</h1>
+        <p class="lead my-3">Уникальных клиентов: <b>{{ clients_count | default:0 }}</b></p>
     </div>
+</div>
 
-    <div class="row">
+<h2 class="mb-4">Статьи блога</h2>
+
+<div class="row">
         {% for blog in blog_list %}
-            <div class="col-6">
+            <div class="col-12">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
 
@@ -88,6 +48,9 @@
         {% endfor %}
     </div>
 </div>
+
+
+
 {% endblock %}
 
 
