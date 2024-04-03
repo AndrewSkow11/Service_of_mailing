@@ -1,3 +1,4 @@
+import smtplib
 from datetime import datetime, timedelta
 import pytz
 from django.core.cache import cache
@@ -34,30 +35,32 @@ def my_job():
         mail.status = "launched"
         mail.save()
         emails_list = [client.email for client in mail.client.all()]
-        result = send_mail(subject=mail.message.subject,
-                           message=mail.message.body,
-                           from_email=settings.EMAIL_HOST_USER,
-                           recipient_list=emails_list,
-                           fail_silently=False)
+        try:
+            result = send_mail(subject=mail.message.subject,
+                               message=mail.message.body,
+                               from_email=settings.EMAIL_HOST_USER,
+                               recipient_list=emails_list,
+                               fail_silently=False)
 
-        print("RESULT", result)
+            print("RESULT", result)
+        except smtplib.SMTPException as e:
+            response = e
 
         if result == 1:
             status = "Отправлено"
         else:
             status = "Ошибка отправки"
 
-        log = Logs(mailing=mail, status=status)
+        log = Logs(mailing=mail, status=status, response=response)
         log.save()
         print(log)
 
-
-        # if mail.periodicity == "day":
-        #     mail.next_date = log.last_mailing_time + day
-        # elif mail.periodicity == "week":
-        #     mail.next_date = log.last_mailing_time + weak
-        # elif mail.periodicity == "mounth":
-        #     mail.next_date = log.last_mailing_time + month
+        if mail.periodicity == "day":
+            mail.next_date = log.last_mailing_time + day
+        elif mail.periodicity == "week":
+            mail.next_date = log.last_mailing_time + weak
+        elif mail.periodicity == "mounth":
+            mail.next_date = log.last_mailing_time + month
 
         if mail.next_date < mail.end_date:
             mail.status = "created"

@@ -115,7 +115,7 @@ class Logs(models.Model):
         self.last_mailing_time = None
 
     def __str__(self):
-        return f"Отправлено: {self.last_mailing_time}," f"Статус: {self.status}"
+        return f'{self.mailing}, {self.status}'
 
     class Meta:
         verbose_name = "лог"

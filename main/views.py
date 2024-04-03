@@ -87,10 +87,16 @@ class MailingListView(LoginRequiredMixin, ListView):
 class MailingDetailView(DetailView):
     model = Mailing
 
+    # def get_context_data(self, **kwargs):
+    #     context_data = super().get_context_data(**kwargs)
+    #     context_data["clients"] = list(self.object.client.all())
+    #     context_data["logs"] = list(Logs.objects.all())
+    #     return context_data
+
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data["clients"] = list(self.object.client.all())
-        context_data["logs"] = list(Logs.objects.all().filter(mailing=self.object))
+        context_data['clients'] = list(self.object.client.all())
+        context_data['logs'] = list(Logs.objects.all())
         return context_data
 
 
