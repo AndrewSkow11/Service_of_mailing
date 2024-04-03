@@ -16,45 +16,45 @@ class StylingFormMixin(forms.Form):
                 field.widget.attrs["class"] = "form-control"
 
 
-
 class MailingForm(StylingFormMixin, forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request')
+        self.request = kwargs.pop("request")
         user = self.request.user
         super().__init__(*args, **kwargs)
-        self.fields['client'].queryset = Client.objects.filter(user=user)
-        self.fields['message'].queryset = Message.objects.filter(user=user)
+        self.fields["client"].queryset = Client.objects.filter(user=user)
+        self.fields["message"].queryset = Message.objects.filter(user=user)
 
     class Meta:
         model = Mailing
-        exclude = ('next_date', 'user', 'is_active')
+        exclude = ("next_date", "user", "is_active")
 
         widgets = {
-            'start_date': DateTimeInput(attrs={
-                'placeholder': 'ДД.ММ.ГГГГ ЧЧ:ММ:СС',
-                'type': 'datetime-local'}),
-            'end_date': DateTimeInput(attrs={
-                'placeholder': 'ДД.ММ.ГГГГ ЧЧ: ММ:СС',
-                'type': 'datetime-local'}),
-            'is_active': CheckboxInput(attrs={
-            }),
+            "start_date": DateTimeInput(
+                attrs={"placeholder": "ДД.ММ.ГГГГ ЧЧ:ММ:СС",
+                       "type": "datetime-local"}
+            ),
+            "end_date": DateTimeInput(
+                attrs={"placeholder": "ДД.ММ.ГГГГ ЧЧ: ММ:СС",
+                       "type": "datetime-local"}
+            ),
+            "is_active": CheckboxInput(attrs={}),
         }
 
 
 class MailingModerForm(StylingFormMixin, forms.ModelForm):
     class Meta:
         model = Mailing
-        fields = ('is_active',)
+        fields = ("is_active",)
 
 
 class MessageForm(StylingFormMixin, forms.ModelForm):
     class Meta:
         model = Message
-        exclude = ('user',)
+        exclude = ("user",)
 
 
 class ClientForm(StylingFormMixin, forms.ModelForm):
     class Meta:
         model = Client
-        exclude = ('user',)
+        exclude = ("user",)
