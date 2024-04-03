@@ -28,7 +28,7 @@ postgres=# \q
 python3 manage.py migrate --run-syncdb
 
 ```
-Для кеширования запуск редиса обязателен, команды для установки и запуска ниже (в случае если не были установлены все записимости из requirements.txt)
+Для кеширования запуск redis обязателен, команды для установки и запуска ниже (в случае если не были установлены все записимости из requirements.txt)
 
 ```commandline
 brew install redis
@@ -37,11 +37,11 @@ pip install redis
 redis-server
 ```
 
-Запуск рассылки из командной строки
+Запуск сервиса рассылок по расписанию
 ```commandline
 ./manage.py run_mailing.py
 ```
-[run_mailing.py](main%2Fmanagement%2Fcommands%2Frun_mailing.py)
+
 
 ## Автор 
 Андрей Сковородников, https://github.com/AndrewSkow11
