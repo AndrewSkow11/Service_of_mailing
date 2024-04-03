@@ -7,20 +7,32 @@ from main.models import Mailing, Logs
 
 
 def my_job():
+    # only for testing
+    # send_mail(
+    #         subject="Test",
+    #         message="smth message",
+    #         from_email=settings.EMAIL_HOST_USER,
+    #         recipient_list=['anjeie24@mail.ru'],
+    #         fail_silently=False,
+    #     )
+
+
     day = timedelta(days=1, hours=0, minutes=0)
     weak = timedelta(days=7, hours=0, minutes=0)
     month = timedelta(days=30, hours=0, minutes=0)
 
     mailings = (
         Mailing.objects.all()
-        .filter(status="Создана")
+        .filter(status="created")
         .filter(is_active=True)
         .filter(next_date__lte=datetime.now(pytz.timezone("Europe/Moscow")))
         .filter(end_date__gte=datetime.now(pytz.timezone("Europe/Moscow")))
     )
 
+    print(mailings)
+
     for mail in mailings:
-        mail.status = "Запущена"
+        mail.status = "launched"
         mail.save()
         emails_list = [client.email for client in mail.client.all()]
         result = send_mail(
@@ -39,17 +51,17 @@ def my_job():
         log = Logs(mail=mail, status=status)
         log.save()
 
-        if mail.interval == "раз в день":
+        if mail.interval == "day":
             mail.next_date = log.last_mailing_time + day
-        elif mail.interval == "раз в неделю":
+        elif mail.interval == "week":
             mail.next_date = log.last_mailing_time + weak
-        elif mail.interval == "раз в месяц":
+        elif mail.interval == "mounth":
             mail.next_date = log.last_mailing_time + month
 
         if mail.next_date < mail.end_date:
-            mail.status = "Создана"
+            mail.status = "created"
         else:
-            mail.status = "Завершена"
+            mail.status = "finished"
         mail.save()
 
 
