@@ -39,6 +39,7 @@ def my_job():
                            from_email=settings.EMAIL_HOST_USER,
                            recipient_list=emails_list,
                            fail_silently=False)
+
         print("RESULT", result)
 
         if result == 1:
@@ -46,9 +47,10 @@ def my_job():
         else:
             status = "Ошибка отправки"
 
-        log = Logs(mail=mail, status=result)
-        print("log", log)
+        log = Logs(mailing=mail, status=status)
         log.save()
+        print(log)
+
 
         # if mail.periodicity == "day":
         #     mail.next_date = log.last_mailing_time + day

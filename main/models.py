@@ -98,26 +98,24 @@ class Mailing(models.Model):
 
 
 class Logs(models.Model):
-    mailing = models.ForeignKey(
-        Mailing, on_delete=models.CASCADE,
-        verbose_name="рассылка", **NULLABLE
-    )
-    last_mailing_time = models.DateTimeField(
-        auto_now=True, verbose_name="время последней рассылки"
-    )
-    status = models.CharField(
-        max_length=64, verbose_name="статус попытки рассылки", null=True
-    )
-    response = models.CharField(
-        max_length=256, verbose_name="ответ сервера", **NULLABLE
-    )
+    mailing = models.ForeignKey(Mailing,
+                                on_delete=models.CASCADE,
+                                verbose_name="рассылка", **NULLABLE)
+    last_mailing_time = models.DateTimeField(auto_now=True,
+                                             verbose_name="время "
+                                                          "последней рассылки")
+    status = models.CharField(max_length=64,
+                              verbose_name="статус попытки рассылки",
+                              null=True)
+    response = models.CharField(max_length=256,
+                                verbose_name="ответ сервера", **NULLABLE)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.last_mailing_time = None
 
     def __str__(self):
-        return f"Отправлено:{self.last_mailing_time}," f"Статус: {self.status}"
+        return f"Отправлено: {self.last_mailing_time}," f"Статус: {self.status}"
 
     class Meta:
         verbose_name = "лог"
