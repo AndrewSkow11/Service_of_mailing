@@ -39,7 +39,7 @@ def my_job():
         log = Logs(mail=mail, status=status)
         log.save()
 
-        if mail.interval == "ежедневно":
+        if mail.interval == "раз в день":
             mail.next_date = log.last_mailing_time + day
         elif mail.interval == "раз в неделю":
             mail.next_date = log.last_mailing_time + weak
