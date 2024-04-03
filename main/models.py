@@ -51,9 +51,9 @@ class Mailing(models.Model):
     ]
 
     STATUS_CHOICES = [
-        ("completed", "завершена"),
-        ("created", "создана"),
-        ("launched", "запущена"),
+        ("completed", "Завершена"),
+        ("created", "Создана"),
+        ("launched", "Запущена"),
     ]
 
     title = models.CharField(max_length=255, verbose_name="заголовок рассылки")

@@ -56,7 +56,7 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
 class MailingUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Mailing
     form_class = MailingForm
-    success_url = reverse_lazy("main:mail_list")
+    success_url = reverse_lazy("main:mailing_list")
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
