@@ -16,7 +16,6 @@ def my_job():
     #         fail_silently=False,
     #     )
 
-
     day = timedelta(days=1, hours=0, minutes=0)
     weak = timedelta(days=7, hours=0, minutes=0)
     month = timedelta(days=30, hours=0, minutes=0)
@@ -35,28 +34,28 @@ def my_job():
         mail.status = "launched"
         mail.save()
         emails_list = [client.email for client in mail.client.all()]
-        result = send_mail(
-            subject=mail.message.subject,
-            message=mail.message.body,
-            from_email=settings.EMAIL_HOST_USER,
-            recipient_list=emails_list,
-            fail_silently=False,
-        )
+        result = send_mail(subject=mail.message.subject,
+                           message=mail.message.body,
+                           from_email=settings.EMAIL_HOST_USER,
+                           recipient_list=emails_list,
+                           fail_silently=False)
+        print("RESULT", result)
 
         if result == 1:
             status = "Отправлено"
         else:
             status = "Ошибка отправки"
 
-        log = Logs(mail=mail, status=status)
+        log = Logs(mail=mail, status=result)
+        print("log", log)
         log.save()
 
-        if mail.interval == "day":
-            mail.next_date = log.last_mailing_time + day
-        elif mail.interval == "week":
-            mail.next_date = log.last_mailing_time + weak
-        elif mail.interval == "mounth":
-            mail.next_date = log.last_mailing_time + month
+        # if mail.periodicity == "day":
+        #     mail.next_date = log.last_mailing_time + day
+        # elif mail.periodicity == "week":
+        #     mail.next_date = log.last_mailing_time + weak
+        # elif mail.periodicity == "mounth":
+        #     mail.next_date = log.last_mailing_time + month
 
         if mail.next_date < mail.end_date:
             mail.status = "created"
