@@ -100,12 +100,22 @@
 
             <div class="card-body">
                 {% for log in logs %}
-                <p>{{ log }}</p>
+                {% if log.mailing_id == object.id %}
+
+                <p> - {{ log.mailing  }},
+                    {% if log.response %}
+                    Ощибка !!!,
+                    {% else %}
+                    Без ошибок,
+                    {% endif %}
+
+                    {{ log.status }}</p>
+                {% endif %}
+
                 {% endfor %}
             </div>
         </div>
     </div>
 
 
-
-{% endblock %}
+    {% endblock %}
