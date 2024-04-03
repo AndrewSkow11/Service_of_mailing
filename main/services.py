@@ -23,7 +23,6 @@ def my_job():
         mail.status = "Запущена"
         mail.save()
         emails_list = [client.email for client in mail.client.all()]
-        print(emails_list)
         result = send_mail(
             subject=mail.message.subject,
             message=mail.message.body,
