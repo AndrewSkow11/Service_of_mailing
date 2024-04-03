@@ -96,7 +96,7 @@ class MailingDetailView(DetailView):
 
 class MailingDeleteView(DeleteView):
     model = Mailing
-    success_url = reverse_lazy("main:mail_list")
+    success_url = reverse_lazy("main:mailing_list")
 
 
 class MessageCreateView(LoginRequiredMixin, CreateView):

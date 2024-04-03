@@ -37,6 +37,11 @@ pip install redis
 redis-server
 ```
 
+Запуск рассылки из командной строки
+```commandline
+./manage.py run_mailing.py
+```
+[run_mailing.py](main%2Fmanagement%2Fcommands%2Frun_mailing.py)
 
 ## Автор 
 Андрей Сковородников, https://github.com/AndrewSkow11
