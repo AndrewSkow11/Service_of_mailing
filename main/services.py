@@ -32,6 +32,7 @@ def my_job():
     print(mailings)
 
     for mail in mailings:
+        response = 'исключения не генерировались'
         mail.status = "launched"
         mail.save()
         emails_list = [client.email for client in mail.client.all()]

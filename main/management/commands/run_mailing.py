@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             my_job,
-            trigger=CronTrigger(second="*/1"),  # Every 1 minute
+            trigger=CronTrigger(second="*/60"),  # Every 1 minute
             id="sendmail",  # The `id` assigned to each job MUST be unique
             max_instances=10,
             replace_existing=True,
