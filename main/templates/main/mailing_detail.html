@@ -103,15 +103,9 @@
                 {% if log.mailing_id == object.id %}
 
                 <p> - {{ log.mailing  }},
-                    {% if log.response %}
-                    Ощибка !!!,
-                    {% else %}
-                    Без ошибок,
-                    {% endif %}
-
+                    {{ log.response }},
                     {{ log.status }}</p>
                 {% endif %}
-
                 {% endfor %}
             </div>
         </div>
